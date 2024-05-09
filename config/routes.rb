@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resources :comments, only:[:create, :destroy, :index, :new]
     end
     get 'review_articles', to: 'articles#review_article', as: 'review_articles'
-    resources :client_users, only: [:new, :create]
+    resources :client_users, only: [:new, :create, :index, :destroy]
     resources :article_assignments, only:[:create]
   end
 end

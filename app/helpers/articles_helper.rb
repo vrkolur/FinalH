@@ -35,6 +35,18 @@ module ArticlesHelper
         yield 
       end
     end
+
+    def user_present(user)
+      if user 
+        yield 
+      end
+    end
+
+    def user_not_preesent(user)
+      unless user 
+        yield 
+      end
+    end
   
   end
   

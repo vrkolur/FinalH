@@ -23,4 +23,10 @@ module ApplicationHelper
             yield 
         end
     end
+
+    def user_reader(user) 
+        if user.role.title == "Reader"
+            yield 
+        end
+    end
 end
