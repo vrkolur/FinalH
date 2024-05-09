@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  category: one
+  body: MyText
+  client_user: one
+  client: one
+  status: false
+  published_at: 2024-05-09 08:44:43
+
+two:
+  title: MyString
+  category: two
+  body: MyText
+  client_user: two
+  client: two
+  status: false
+  published_at: 2024-05-09 08:44:43
