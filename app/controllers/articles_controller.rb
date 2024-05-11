@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
     def create 
         @article = @client.articles.create(article_params)
         if @article.save 
-            redirect_to articles_path
+            redirect_to client_articles_path
         else
             render :new, status: :unprocessable_entity 
         end
@@ -64,7 +64,7 @@ class ArticlesController < ApplicationController
         if params[:preview].present?
             send_data(article_pdf.render, filename: "#{@article.title}.pdf", type: "application/pdf", disposition: 'inline')
         else
-            send_data(appointment_pdf.render,  filename: "#{@article.title}.pdf", type: "application/pdf")
+            send_data(article_pdf.render,  filename: "#{@article.title}.pdf", type: "application/pdf")
         end
     end
 

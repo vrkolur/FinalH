@@ -18,7 +18,8 @@ RSpec.describe "Clients", type: :request do
 
     it 'renders all the available clients' do 
       client1 = FactoryBot.create(:client) # To avoid the @clients.each error
-      get clients_path 
+      client1.name = "Name"
+      get clients_path
       expect(response).to have_http_status(:success)
     end
 
@@ -53,7 +54,10 @@ RSpec.describe "Clients", type: :request do
 
     it 'should return success after updated of sub_domain ' do
       client1 = FactoryBot.create(:client, name:"New_client")
-      post update_sub_domain_client_path(id: client1.id), params: {sub_domain: "sub_domain_edit",id:client1.id}
+      post update_sub_domain_client_path(id: client1.id), params: {
+        sub_domain: "sub_domain_edit",
+        id:client1.id
+      }
       expect(response).to have_http_status(302)
       expect(Client.first.sub_domain).to eq("sub_domain_edit")
     end

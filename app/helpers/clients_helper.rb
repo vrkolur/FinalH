@@ -1,7 +1,7 @@
 module ClientsHelper
 
     def client_form_errors(client) 
-        if client && client.errors.any?
+        if client && client&.errors.any?
             yield
         end
     end
