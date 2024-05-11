@@ -47,6 +47,7 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   # gem "debug", platforms: %i[ mri windows ]
+  gem "faker", "~> 3.3"
 end
 
 group :development do
@@ -62,8 +63,10 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem 'capybara', '~> 3.35'
+  gem "rspec-rails", "~> 6.1"
+  gem "webmock", "~> 3.23"
+  gem "factory_bot_rails", "~> 6.4"
 end
 
 gem "devise", "~> 4.9"
@@ -79,3 +82,9 @@ gem "ransack", "~> 4.1"
 gem "noticed", "~> 2.2"
 
 gem "prawn", "~> 2.5"
+
+
+
+
+gem "rails-controller-testing", "~> 1.0"
+
