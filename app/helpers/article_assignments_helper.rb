@@ -1,0 +1,2 @@
+module ArticleAssignmentsHelper
+end

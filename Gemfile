@@ -83,8 +83,5 @@ gem "noticed", "~> 2.2"
 
 gem "prawn", "~> 2.5"
 
-
-
-
 gem "rails-controller-testing", "~> 1.0"
 
