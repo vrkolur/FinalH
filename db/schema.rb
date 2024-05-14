@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_12_093646) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_13_131439) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -120,6 +120,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_093646) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "sender_id", null: false
+    t.integer "reciever_id", null: false
+    t.string "msg"
+    t.boolean "status", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reciever_id"], name: "index_messages_on_reciever_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
   create_table "noticed_events", force: :cascade do |t|
     t.string "type"
     t.string "record_type"
@@ -184,4 +195,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_093646) do
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "articles"
   add_foreign_key "likes", "users"
+  add_foreign_key "messages", "users", column: "reciever_id"
+  add_foreign_key "messages", "users", column: "sender_id"
 end

@@ -1,8 +1,8 @@
 class ClientUsersController < ApplicationController
     before_action :authenticate_user!
+    before_action :check_admin?
     before_action :set_client
     before_action :set_client_user
-    before_action :check_admin?
     skip_before_action :verify_authenticity_token, only: [:destroy]
 
     def new 
