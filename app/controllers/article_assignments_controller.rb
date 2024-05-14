@@ -8,15 +8,13 @@ class ArticleAssignmentsController < ApplicationController
     end
 
     def create 
-        @author = User.find_by(id: params[:author_id])
-        msg = "Hey you are supposed to create a artile with title:#{params[:title]} and Category: #{Category.find_by(id: params[:category_id]).title} "
-        @notification = Message.create(sender:current_user, reciever:@author,msg: msg)
-        if @notification.save 
+        notification = Services::ArticleAssignmentService.new(params: params,current_user: current_user).create
+        if notification&.save 
             flash[:notice] = 'Article Assigned Successfully'
             redirect_to new_article_assignment_path(client_id: @client.sub_domain)
         else 
-            flash[:notice] = 'Error Occured please try again'
-            render :new
+            flash[:alert] = 'Error Occured please try again'
+            redirect_to new_article_assignment_path(client_id: @client.sub_domain)
         end
     end
 
