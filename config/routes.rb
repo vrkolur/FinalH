@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resources :client_users, only: [:new, :create, :index, :destroy]
     resources :article_assignments, only: [:new, :create]
     # Message Controller 
-    resources :messages, only: :destroy do 
+    resources :messages do 
       member do 
         post 'mark_as_read', to:'messages#mark_as_read'
       end

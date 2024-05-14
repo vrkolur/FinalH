@@ -23,7 +23,7 @@ class Article < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["article_tags", "category", "tags"]
+    ["article_tags", "category", "tags", "client_user_user_name_cont"]
   end
 
 
