@@ -46,7 +46,7 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  # gem "debug", platforms: %i[ mri windows ]
+  gem "debug", platforms: %i[ mri windows ]
   gem "faker", "~> 3.3"
 end
 
@@ -71,7 +71,7 @@ end
 
 gem "devise", "~> 4.9"
 
-gem "byebug", "~> 11.1"
+# gem "byebug", "~> 11.1"
 
 gem "friendly_id", "~> 5.5"
 
@@ -85,5 +85,6 @@ gem "prawn", "~> 2.5"
 
 gem "rails-controller-testing", "~> 1.0"
 
-
 gem "image_processing", "~> 1.12"
+
+gem "will_paginate", "~> 4.0"

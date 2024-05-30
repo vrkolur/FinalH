@@ -1,7 +1,7 @@
 class ClientUsersController < ApplicationController
     before_action :authenticate_user!
-    before_action :check_admin?
     before_action :set_client
+    before_action :check_admin?
     before_action :set_client_user
     skip_before_action :verify_authenticity_token, only: [:destroy]
 
@@ -13,8 +13,8 @@ class ClientUsersController < ApplicationController
         @user = User.create(client_user_params)
         if  @user.save
             @client_user = @client.client_users.create(user: @user)
-            redirect_to client_articles_path(client_id: @client.sub_domain)
             flash[:notice]= 'Client User Created'
+            redirect_to client_articles_path(client_id: @client.sub_domain)
         else 
             flash[:alert] = "Error Password does not match or Email Taken"
             render :new, status: :unprocessable_entity 
@@ -30,6 +30,10 @@ class ClientUsersController < ApplicationController
     end
 
     def download 
+        authors_pdf = Services::AuthorsDownloadService.new(client: @client).download
+        unless params[:preview].present?
+            send_data(authors_pdf.render,  filename: "#{@client.name}.pdf", type: "authors/pdf")
+        end
     end
 
     private 
@@ -39,8 +43,8 @@ class ClientUsersController < ApplicationController
     end
 
     def check_admin? 
-        unless current_user.role.title=='Admin' || current_user.role.title=='ClientAdmin'
-            redirect_to root_path
+        unless (current_user.role.title=='Admin' || current_user.role.title=='ClientAdmin') && ClientUser.find_by(user: current_user).client == @client
+            redirect_to client_articles_path(client_id: ClientUser.find_by(user: current_user).client.sub_domain)
         end
     end
 

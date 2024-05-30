@@ -23,7 +23,6 @@ class ArticleAssignmentsController < ApplicationController
 
     def check_admin 
         client_user = ClientUser.find_by(user: current_user) if current_user && current_user.role.title == 'ClientAdmin'
-        # @client = Client.find_by(sub_domain: params[:client_id])
         unless client_user&.client == @client 
             redirect_to articles_path(client_id: client_user&.client&.sub_domain)
         end

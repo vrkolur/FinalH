@@ -2,7 +2,6 @@ class ClientsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_client
     before_action :check_admin , only: %i[ show create index edit update destroy change_client_active_status ]
-    # before_action :check_client_admin , only: %i[ show edit_sub_domain update_sub_domain ]
     skip_before_action :verify_authenticity_token, only: [:change_client_active_status,:destroy,:update_sub_domain]
 
     
@@ -22,12 +21,18 @@ class ClientsController < ApplicationController
     end 
     
     def edit 
+        # byebug
     end 
 
     def show 
+
     end
 
     def update 
+        # byebug
+        unless @client
+            @client = Client.find_by(sub_domain: params[:id])
+        end
         @client.slug = params[:sub_domain]
         if @client.update(client_params)
             flash[:notice] = "Client Updated"
@@ -42,6 +47,7 @@ class ClientsController < ApplicationController
     end
 
     def update_sub_domain 
+        # byebug
         @client.update(slug: params[:sub_domain])
         if @client.update(sub_domain: params[:sub_domain]) 
             flash[:alert] = 'Sub Domain Updated'
@@ -55,6 +61,7 @@ class ClientsController < ApplicationController
     end
 
     def destroy 
+        # byebug
         @client.destroy           
     end
 
@@ -70,6 +77,7 @@ class ClientsController < ApplicationController
         unless @client 
             @client = Client.find_by(sub_domain: params[:id])
         end
+        # byebug
     end
 
     def check_admin 
